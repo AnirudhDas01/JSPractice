@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="add">Add to Cart</button>
+    <button id="addTwo">+2</button>
+    <button id="addThree">+3</button>
+    <button id="reset">Reset Cart</button>
+    <h1>The value for number is: <span id="myText">0</span></h1>
+<script>
+    let cartQuantity = 0;
+
+    var add = document.getElementById('add');
+    var addTwo = document.getElementById('addTwo');
+    var addThree = document.getElementById('addThree');
+    var reset = document.getElementById('reset');
+    var output = document.getElementById("myText")
+    add.addEventListener('click' , function() {
+        cartQuantity++;
+        output.innerHTML = cartQuantity.toString();
+    });
+    addTwo.addEventListener('click' , function() {
+        cartQuantity += 2;
+        output.innerHTML = cartQuantity.toString();
+    });
+    addThree.addEventListener('click' , function() {
+        cartQuantity += 3;
+        output.innerHTML = cartQuantity.toString();
+    });
+    reset.addEventListener('click' , function() {
+        cartQuantity =0;
+        output.innerHTML = cartQuantity.toString();
+    });
+    
+
+
+</script>
+</body>
+</html>

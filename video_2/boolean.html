@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <h1>Are your Above 18.?</h1>
+        <input type="submit" value="Yes" id="true">
+        <input type="submit" value="No" id="false">
+    
+    <h1 id="output"></h1>
+    <script>
+        yes = document.getElementById('true');
+        no = document.getElementById('false');
+        output = document.getElementById('output');
+        
+        yes.addEventListener('click', function(){
+            output.innerHTML = 'Redirecting to the main Page....'
+        })
+        no.addEventListener('click', function(){
+            output.innerHTML = 'Sorry, Can\'t continue Further, visit again Later';
+        })
+
+    </script>
+</body>
+</html>
