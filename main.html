@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .indicator-on {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: rgb(48, 238, 48);
+            display: inline-block;
+            margin-right: 12px;
+        }
+        .indicator-off {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: rgb(224, 33, 33);
+            display: inline-block;
+            margin-right: 12px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="indicator-off" id="led"></div>
+    <h1 id="header" style="display: inline-block;">Button Turned on</h1><br>
+    <input type="submit" value="Click Me.!!" id="btn" >
+
+</body>
+<script>
+    var header = document.getElementById('header');
+    var btn = document.getElementById('btn');
+    var led = document.getElementById('led')
+    
+    btn.addEventListener('click', function() {
+        if(header.innerHTML == "Button Turned on") {
+            header.innerHTML = "Button Turned off"
+            led.className = "indicator-off";
+        }
+        else {
+            header.innerHTML = "Button Turned on"
+            led.className = "indicator-on";
+        }
+    });
+
+</script>
+</html>
