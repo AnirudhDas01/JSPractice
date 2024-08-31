@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Projects</title>
+    <style>
+        #js-subscribe-button {
+            text-align: center;
+            border:none;
+            background-color: red;
+            height: 30px;
+            width: 80px;
+            border-radius: 50px;
+            cursor: pointer;
+            color: white;
+
+        }
+        body 
+        {
+            font: Arial;
+        }
+    </style>
+</head>
+<body>
+    <p>Youtube Subscribe Button</p>
+    <button id="js-subscribe-button">Subscribe</button>
+    <p>Rock Paper Scissor</p>
+    <a href="rock-paper-scrissor.html">Click Here</a>
+
+    <p>Amazon Shopping Calculator</p>
+    <input type="text" placeholder="Enter Amount" id="inputBar">
+    <input type="submit" id="submit">
+    <h1 id="output"></h1>
+    <p>Orders Under $40 = +10$ Shipping.</p>
+    <p>Orders Over $40 = Free Shipping.</p>
+    <script>
+            var buttonElement = document.getElementById('js-subscribe-button');
+            buttonElement.addEventListener('click', function(){
+                if (buttonElement.innerText === 'Subscribe') {
+                    buttonElement.innerText = 'Subscribed';
+                    buttonElement.style.backgroundColor = '#f2f2f2';
+                    buttonElement.style.color = 'black';
+                }
+                else
+                { 
+                    buttonElement.innerText = 'Subscribe';
+                    buttonElement.style.backgroundColor = ''
+                    buttonElement.style.color='';
+                }
+            });
+            
+            var submit = document.getElementById('submit');
+            var output = document.getElementById('output');
+            submit.addEventListener('click', function() {
+                var inputBar = document.getElementById('inputBar').value;
+                var amount = Number(inputBar); 
+                    if (amount <= 40) {
+                        output.innerText = `${(amount+10)} $`;
+                        
+                    }
+                    else {
+                        output.innerText = 'Free Delivery !';
+                    }
+            });
+    </script>
+</body>
+</html>

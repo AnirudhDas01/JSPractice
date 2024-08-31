@@ -1,0 +1,28 @@
+* {
+    background-color: black;
+    color: white;
+}
+
+button { 
+    height: 70px;
+    width: 70px;
+    border: 3px solid white;
+    border-radius: 50%;
+    font-size: 30px
+}
+
+.choice {
+    display: inline-block;
+    height: 120px;
+    width: 200px;
+    border: 2px solid yellowgreen;
+    text-align: center;
+    justify-content: space-between;
+   
+}
+
+
+.choice span {
+ font-size: 50px;
+}
+
