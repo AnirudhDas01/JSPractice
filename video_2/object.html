@@ -14,6 +14,8 @@
     <button id="reset">Reset</button>
     <h1>Player's Points: <span id="playerResult">0</span></h1>
     <h1>Computer's Points: <span id="computerResult">0</span></h1>
+    <h1>Tie: <span id="tie">0</span></h1>
+
 <script>
     var rock = document.getElementById('pRock');
     var paper = document.getElementById('pPaper');
@@ -22,10 +24,15 @@
     var computerResult = document.getElementById('computerResult');
     var pAnswer = document.getElementById('pAnswer');
     var cAnswer = document.getElementById('cAnswer');
+    var tie = document.getElementById('tie')
     var reset = document.getElementById('reset');
     var playerChoice;
-    var playerPoint = 0;
-    var computerPoint = 0;
+    var score = {
+        player : 0,
+        computer : 0,
+        tie : 0
+    }
+    console.log(localStorage.getItem('message'));
 
     rock.addEventListener('click', function(){
         pAnswer.innerHTML = "Rock"
@@ -50,10 +57,12 @@
         checkResult(computerChoiceResult);
     }) ;
     reset.addEventListener('click', function() {
-        playerPoint = 0.0;
-        computerPoint = 0.0;
-        playerResult.innerHTML = playerPoint.toString();
-        computerResult.innerHTML = computerPoint.toString();
+        score.player = 0;
+        score.computer = 0;
+        score.tie = 0;
+        playerResult.innerHTML = score.player.toString();
+        computerResult.innerHTML = score.computer.toString();
+        tie.innerHTML = score.tie.toString();
     });
 
 
@@ -77,20 +86,22 @@
     function checkResult(computerChoiceResult) {
         // Rename the variable to avoid shadowing
     if (playerChoice == computerChoiceResult) {
-        // It's a draw
+        score.tie++;
+        tie.innerHTML = score.tie.toString();
     }
     else {
         if ((playerChoice == 1 && computerChoiceResult == 3) || 
             (playerChoice == 2 && computerChoiceResult == 1) || 
             (playerChoice == 3 && computerChoiceResult == 2)) {
-            playerPoint++;
-            playerResult.innerHTML = playerPoint.toString();
+            score.player ++;
+            playerResult.innerHTML = score.player.toString();
         }
         else {  
-            computerPoint++;
-            computerResult.innerHTML = computerPoint.toString();
+            score.computer++;
+            computerResult.innerHTML = score.computer.toString();
         }
     }
+    localStorage.setItem('message','hello'); 
 }
 </script>
 </body>
