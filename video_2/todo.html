@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style-todo.css">
 </head>
 <body>
-<h1>Todo List</h1>
-<input type="text" class="js-name-input" placeholder="Todo Name">
-<button onclick="
-addTodo();
-">Add</button>
-    <script src="todo.js"></script>
-</body>
+    <h1>Todo List</h1>
+    <div class="input-box">    
+        <input type="text" class="js-name-input" placeholder="Todo Name">
+        <input type="date" id="js-date-input">
+        <button onclick="addTodo();">Add</button>
+    </div>
+        <ul id="task-list">
+            
+        </ul>
+    <script src="todo-for-each.js"></script>
+    </body>
 
 </html>

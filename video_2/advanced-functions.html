@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="choice">Player:<br><span id="pAnswer"></span></h1>
+    <h1 class="choice">Computer:<br><span id="cAnswer"></span></h1><br>
+    <button id="pRock">✊</button>
+    <button id="pPaper">✋</button>
+    <button id="pScissor">✌️</button>
+    <button id="reset">⏪</button><br>
+    <button id="replay">🔄</button><br>
+    <h1>Player: <span id="playerResult">0</span></h1>
+    <h1>Computer's Points: <span id="computerResult">0</span></h1>
+    <h1>Tie: <span id="tie">0</span></h1>
+
+<script>
+    var rock = document.getElementById('pRock');
+    var paper = document.getElementById('pPaper');
+    var scissor = document.getElementById('pScissor');
+    var playerResult = document.getElementById('playerResult');
+    var computerResult = document.getElementById('computerResult');
+    var pAnswer = document.getElementById('pAnswer');
+    var cAnswer = document.getElementById('cAnswer');
+    var tie = document.getElementById('tie')
+    var reset = document.getElementById('reset');
+    var replay = document.getElementById('replay');
+    var playerChoice;
+    var score = JSON.parse(localStorage.getItem('score')) || {player: 0, computer: 0 , tie: 0};
+    
+
+    rock.addEventListener('click', function(){
+        pAnswer.innerHTML = "✊"
+        playerChoice = 1; 
+        var computerChoiceResult = computerChoice();//rock
+        checkResult(computerChoiceResult);
+    }) ;
+    
+    paper.addEventListener('click', function(){
+        pAnswer.innerHTML = "✋"
+        playerChoice = 2;
+        var computerChoiceResult = computerChoice(); //paper
+        checkResult(computerChoiceResult);
+    }) ;
+
+    scissor.addEventListener('click', function(){
+        pAnswer.innerHTML = "✌️"
+        playerChoice = 3;
+        var computerChoiceResult = computerChoice(); //scissor
+        checkResult(computerChoiceResult);
+    }) ;
+    reset.addEventListener('click', function() {
+        score = {player: 0 ,computer : 0 , tie: 0};
+        updateScore();
+        localStorage.setItem('score', JSON.stringify(score));
+    });
+
+
+    function computerChoice() { // this will return a random rock paper scissor as string as output
+        var random = Math.random();
+        if (random >= 0 && random < 1/3 ) {
+            cAnswer.innerHTML = '✊';
+            return 1; //rock
+        }
+        else if (random >= 1/3 && random < 2/3 ) {
+            cAnswer.innerHTML = '✋';
+            return 2;  //paper
+        } 
+        else {
+            cAnswer.innerHTML = '✌️';
+            return 3;  //scissor
+        }
+        checkResult();
+    }
+
+    function checkResult(computerChoiceResult) {
+        // Rename the variable to avoid shadowing
+    if (playerChoice == computerChoiceResult) {
+        score.tie++;
+        tie.innerHTML = score.tie.toString();
+    }
+    else {
+        if ((playerChoice == 1 && computerChoiceResult == 3) || 
+            (playerChoice == 2 && computerChoiceResult == 1) || 
+            (playerChoice == 3 && computerChoiceResult == 2)) {
+            score.player ++;
+            playerResult.innerHTML = score.player.toString();
+        }
+        else {  
+            score.computer++;
+            computerResult.innerHTML = score.computer.toString();
+        }
+    }
+    localStorage.setItem('score', JSON.stringify(score)); 
+    }
+
+
+    function updateScore() {
+        playerResult.innerHTML = score.player.toString();
+        computerResult.innerHTML = score.computer.toString();
+        tie.innerHTML = score.tie.toString();
+    }
+    var isClicked = false;
+    var intervalID ;
+
+    replay.addEventListener('click',function()
+    {    
+        if (isClicked == false){
+        intervalID = setInterval(() =>{
+            randomSelect();
+        }, 1000);
+        isClicked = true;
+        replay.innerHTML = '🚫';
+    }else {
+        clearInterval(intervalID);
+        isClicked = false;
+        replay.innerHTML = '🔁';
+    }
+    });
+    function randomSelect() {
+        var math = Math.random();
+        if (math>=0 && math<1/3){
+            rock.click();
+        }
+        else if(math>=1/3 && math<2/3){
+            paper.click();
+        }
+        else {
+            scissor.click();
+        }
+    }
+</script>   
+</body>
+</html>
