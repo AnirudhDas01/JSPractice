@@ -1,6 +1,5 @@
 import {products} from '../data/products.js';
-import {cart} from '../data/cart.js';
-
+import {cart, addToCart} from '../data/cart.js';
 let productHTML =  ``;
 
 products.forEach((product)=> {
@@ -44,7 +43,7 @@ products.forEach((product)=> {
 
             <div class="product-spacer"></div>
 
-            <div class="added-to-cart">
+            <div class="added-to-cart" data-product-id="${product.id}">
                 <img src="images/icons/checkmark.png">
                 Added
             </div>
@@ -56,39 +55,33 @@ products.forEach((product)=> {
             </div>`;
 
 });
-let productsGrid = document.querySelector('.products-grid');
-productsGrid.innerHTML = productHTML;
+    let productsGrid = document.querySelector('.products-grid');
+    productsGrid.innerHTML = productHTML;
+// product listing ends
 
-document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
-    button.addEventListener('click',function(){
-        const productId = button.dataset.productId;
-        let matchingItem;
-            cart.forEach((item,index)=> {
-                if(productId === item.productId) {
-                    matchingItem = item;
-
-                }
-            });
-            if (matchingItem) {
-                matchingItem.quantity++;
-                toggleAddToCartTab(matchingItem,matchingItem.index);
-            }
-            else {
-                cart.push({
-                    productId: productId,
-                    quantity: 1
-                })
-               
-            }
-            var totalQuantity = 0;
-            cart.forEach((item)=>
+//this function updates the cart div add a number by one when someone click on add to cart button 
+        function updateCartQuantity() {
+            let totalQuantity = 0;
+            cart.forEach((cartItem)=>
                 {
-                    totalQuantity+= item.quantity;
-                }
-            )
+                    totalQuantity+= cartItem.quantity;
+                });
             var cartQuantity = document.querySelector('.cart-quantity');
-            cartQuantity.innerText = totalQuantity.toString();
-
+            if (cartQuantity){
+                cartQuantity.innerText = totalQuantity.toString();
+            }
+        } 
+    document.addEventListener('DOMContentLoaded', ()=>{
+        document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
+            button.addEventListener('click',() =>{
+                const productId = button.dataset.productId;
+                    addToCart(productId);
+                    updateCartQuantity();
+            });
+        });
     });
-});
 
+    //this function checks if any item is present in cart if not adds it and if present only increases the quantity by one.
+
+
+   //this function toggles a green sign signifying that the item is added to the cart UI/UX function
