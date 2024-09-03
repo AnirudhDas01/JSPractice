@@ -1,5 +1,6 @@
+import {products} from '../data/products.js';
 import {cart} from '../data/cart.js';
-let productsGrid = document.querySelector('.products-grid');
+
 let productHTML =  ``;
 
 products.forEach((product)=> {
@@ -55,12 +56,9 @@ products.forEach((product)=> {
             </div>`;
 
 });
-
-function toggleAddToCartTab(elem,index){
-    elem[index].style.opacity= 100;
-}
-
+let productsGrid = document.querySelector('.products-grid');
 productsGrid.innerHTML = productHTML;
+
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
     button.addEventListener('click',function(){
         const productId = button.dataset.productId;
