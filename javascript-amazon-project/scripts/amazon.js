@@ -80,8 +80,7 @@ products.forEach((product)=> {
                     updateCartQuantity();
             });
         });
-    });
-
+    }); 
     //this function checks if any item is present in cart if not adds it and if present only increases the quantity by one.
 
 

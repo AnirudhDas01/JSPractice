@@ -1,5 +1,5 @@
 
-export    var deliveryOptions = [
+export  var deliveryOptions = [
     {
         id: '3',
         deliveryDays: 1,
