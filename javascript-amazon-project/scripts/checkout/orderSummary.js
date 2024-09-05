@@ -5,6 +5,7 @@ import  dayjs  from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions } from '../../data/deliveryOptions.js';
 import { renderPaymentSummary } from './paymentSummary.js';
 export  function renderOrderSummary() {
+
     cart.forEach((cartItem)=>{
         const productId = cartItem.productId;
         let matchingProduct;
@@ -13,6 +14,7 @@ export  function renderOrderSummary() {
                     matchingProduct = product;
             } 
         });
+
         const deliveryOptionId = cartItem.deliveryOptionId;
         let deliveryOption ; 
         deliveryOptions.forEach((option)=> {
@@ -21,8 +23,11 @@ export  function renderOrderSummary() {
                 }
         });
         const today = dayjs();
+        const deliveryDays = deliveryOption && deliveryOption.deliveryDays !== undefined 
+        ? deliveryOption.deliveryDays 
+        : (deliveryOptions[2] ? deliveryOptions[2].deliveryDays : 0);
         const deliveryDay = today.add(
-            deliveryOption.deliveryDays, 
+            deliveryDays, 
             'days'
         );
         const dateString = deliveryDay.format(
@@ -40,7 +45,7 @@ export  function renderOrderSummary() {
                                 ${matchingProduct.name}
                                 </div>
                                 <div class="product-price">
-                                $${formatCurrency(matchingProduct.priceCents)}
+                                ${matchingProduct.getPrice()}
                                 </div>
                                 <div class="product-quantity">
                                 <span>
