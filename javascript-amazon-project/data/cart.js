@@ -40,7 +40,8 @@ let matchingItem;
         else {
             cart.push({
                 productId: productId,
-                quantity: 1
+                quantity: 1,
+                deliveryOptionId: '3',
             })
             addedToCartSign(productId);
         }

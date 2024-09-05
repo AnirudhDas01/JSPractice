@@ -1,3 +1,4 @@
+
 import { formatCurrency } from "../scripts/utils/money.js";
   class Products {
     id ;
@@ -34,7 +35,24 @@ import { formatCurrency } from "../scripts/utils/money.js";
       return `<a href="${this.sizeChartLink}" target="_blank">Size Chart</a>`;
     }
   }
-    
+
+  class Appliance extends Products {
+    instructionsLink;
+    warrantyLink;
+    constructor(productDetails){
+      super(productDetails);
+      this.instructionsLink = 'https://kitchshop.my/wp-content/uploads/2019/03/dummy-user-manual.pdf';
+      this.warrantyLink = 'https://kitchshop.my/wp-content/uploads/2019/03/dummy-user-manual.pdf';
+    }
+    extraInfoHTML() {
+      return `
+      <a href="${this.instructionsLink}" target="_blank">Instruction Manual</a>
+      <a href="${this.warrantyLink}" target="_blank">Warranty Link</a>
+      `;
+
+    }
+
+  }
 
   export const products = [
     {
@@ -695,14 +713,17 @@ import { formatCurrency } from "../scripts/utils/money.js";
         "mens"
       ]
     }
-  ].map((productDetails)=>{
-    if (productDetails.type === 'clothing')
-    {
-      return new Cloathing(productDetails);
-    }
-    else{
+  ];
+
+export const instantiatedProducts = products.map((productDetails)=>{
+  if (productDetails.type === 'clothing') {
+    return new Cloathing(productDetails);
+  }
+  else
+  if(productDetails.keywords.includes('appliances')) {
+    return new Appliance(productDetails);
+  }
+  else {
     return new Products(productDetails);
-    }
-  });
-
-
+  }
+})
